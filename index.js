@@ -1,1 +1,3 @@
-console.log('Hello World');
+import serverConnect from "./src/server.js";
+// ------------ server connect here ----------------
+serverConnect();
