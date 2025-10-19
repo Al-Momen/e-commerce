@@ -1,6 +1,7 @@
 
 import app from '../app.js';
 const PORT = process.env.PORT || 3001;
+  // "dev": "node --env-file=backend/.env --watch index.js"
 
 function serverConnect(){
     app.listen(PORT, (err) => {
