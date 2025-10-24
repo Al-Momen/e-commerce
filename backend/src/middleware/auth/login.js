@@ -1,4 +1,3 @@
-
 const isLoggedIn = (req, res, next) => {
     const login = true;
     if (login) {
