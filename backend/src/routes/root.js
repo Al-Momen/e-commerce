@@ -1,7 +1,7 @@
 import express from 'express';
 import rateLimiter from '../middleware/global/ratelimiter.js';
 import { isLoggedIn, isLoggedIn2 } from '../middleware/auth/login.js';
-import siteController from '../controllers/siteController/siteController.js';
+import siteController from '../controllers/frontend/siteController.js';
 const rootRouter = express.Router();
 
 rootRouter.get('/', [isLoggedIn, isLoggedIn2], siteController.home);

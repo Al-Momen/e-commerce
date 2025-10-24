@@ -9,5 +9,4 @@ import connectDatabase from "./backend/src/config/db.js";
     // ------------ server connect here ----------------
     serverConnect();
     // ------------ server end connect here ----------------
-
 })();
