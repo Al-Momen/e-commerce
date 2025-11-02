@@ -3,7 +3,12 @@ import rateLimiter from '../middleware/global/ratelimiter.js';
 import UserController from '../controllers/user/userController.js';
 const userRouter = express.Router();
 
+userRouter.use(rateLimiter);
+
 userRouter.get('/index', UserController.index);
-userRouter.post('/create', [rateLimiter], UserController.create);
+userRouter.post('/create', UserController.create);
+userRouter.get('/edit/:id', UserController.edit);
+userRouter.delete('/delete/:id', UserController.delete);
+userRouter.post('/register', UserController.register);
 
 export default userRouter;

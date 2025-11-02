@@ -1,10 +1,12 @@
 //-------------App Configure here ------------------
 import express from 'express';
 import morgan from 'morgan';
-import { errorHandler } from './middleware/global/errors/errorHandler.js';
-import { notFound } from './middleware/global/errors/notFound.js';
+import { errorHandler } from './helper/errors/errorHandler.js';
+import { notFound } from './helper/errors/notFound.js';
 import { rootRouter } from './routes/root.js';
 import userRouter from './routes/user.js';
+
+
 
 const app = express();
 app.use(morgan('dev'));
