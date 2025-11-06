@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
-const mongoUrl = process.env.MONGO_URL;
+import {mongoUrl} from "../helper/secret.js";
+
+if (!mongoUrl) {
+    console.error("MongoDB Connection Error: MONGO_URL not defined in environment variables.");
+    process.exit(1);
+}
+// "dev": "nodemon --env-file=backend/.env index.js"
 // "dev": "node --env-file=backend/.env --watch index.js"
 
 const connectDatabase = async () => {

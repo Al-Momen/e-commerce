@@ -2,7 +2,8 @@ import User from "../../models/userModel.js";
 import { successResponse } from "../../helper/responseHandler.js";
 import { findItem } from "../../services/findItem.js";
 import deleteFileAsync from "../../helper/deleteImage.js";
-import { createError } from "../../helper/createError.js";
+import { createJwtWebToken, createError } from "../../helper/helper.js";
+import { jwtSecretKey } from "../../helper/secret.js";
 const UserController = {};
 
 UserController.index = async (req, res, next) => {
@@ -109,19 +110,22 @@ UserController.register = async (req, res, next) => {
         const {
             first_name: firstName,
             last_name: lastName,
-            username,
+            username: userName,
             email,
             phone
         } = req.body;
 
-        const emailExists = await User.exists({email});
+        const emailExists = await User.exists({ email });
         if (emailExists) {
-            createError('Email already in use', 409);
+            createError('User with this email already exists. Please login', 409);
         }
+
+        const token = createJwtWebToken({ firstName,lastName,userName,email,phone }, jwtSecretKey, { expiresIn: '10m' });
 
         return successResponse(res, {
             statusCode: 201,
-            message: "User registered successfully"
+            message: "User registered successfully",
+            payload: { token }
         })
 
     } catch (error) {
