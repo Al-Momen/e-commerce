@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+import {smtpHost,smtpPort,smtpUser,smtpPass} from './secret.js'
 
 /**
  * @param {string} message - Error message
@@ -34,4 +36,39 @@ const createJwtWebToken = (payload, jwtSecretKey, others) => {
     }
 }
 
-export { createError, createJwtWebToken };
+
+// ----------------Start mail setup ----------------
+const transporter = nodemailer.createTransport({
+    host: smtpHost,
+    port: smtpPort,
+    secure: false, 
+    auth: {
+        user: smtpUser,
+        pass: smtpPass
+    }
+});
+
+async function sendEmail(emailBody) {
+    const mailOptions = {
+        from: emailBody.from,
+        to: emailBody.to,
+        subject: emailBody.subject,
+        text: emailBody.text,
+        html: emailBody.html
+    };
+
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Email Sent Successfully!");
+        console.log("Message ID:", info.messageId);
+        
+    } catch (error) {
+        createError(`Error sending email:, ${error.message}`, 500);
+    }
+}
+
+
+
+// ----------------End mail setup ----------------
+
+export { createError, createJwtWebToken,sendEmail };

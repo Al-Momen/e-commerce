@@ -51,7 +51,7 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Username is required'],
         minLength: [5, 'Username minimum Length 3 character'],
-        maxLength: [10, 'Username maximum Length 10 character'],
+        maxLength: [20, 'Username maximum Length 10 character'],
         match: [/^[A-Za-z0-9]+$/, "Username can only contain letters and numbers"],
         trim: true,
         lowercase: true,

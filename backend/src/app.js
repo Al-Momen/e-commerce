@@ -7,7 +7,6 @@ import { rootRouter } from './routes/root.js';
 import userRouter from './routes/user.js';
 
 
-
 const app = express();
 app.use(morgan('dev'));
 app.use(express.json());

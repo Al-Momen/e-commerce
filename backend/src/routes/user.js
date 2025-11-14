@@ -10,5 +10,6 @@ userRouter.post('/create', UserController.create);
 userRouter.get('/edit/:id', UserController.edit);
 userRouter.delete('/delete/:id', UserController.delete);
 userRouter.post('/register', UserController.register);
+userRouter.post('/verify', UserController.verify);
 
 export default userRouter;
