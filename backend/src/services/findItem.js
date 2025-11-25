@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { createError } from "../../helper/helper.js";
+import { createError } from "../helper/helper.js";
+
 const findItem = async (Model, id, options = {}) => {
     try {
         const item = await Model.findById(id, options);
