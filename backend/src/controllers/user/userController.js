@@ -108,18 +108,13 @@ UserController.delete = async (req, res, next) => {
 };
 
 UserController.register = async (req, res, next) => {
-    console.log(req.body);
-
     try {
         const {
             first_name,
             last_name,
             username,
             email,
-            phone,
-            password,
-            image,
-            address
+            password
         } = req.body;
 
         const emailExists = await User.exists({ email });
@@ -127,7 +122,7 @@ UserController.register = async (req, res, next) => {
             createError('User with this email already exists. Please login', 409);
         }
 
-        const token = createJwtWebToken({ first_name, last_name, username, email, phone, password, image, address }, jwtSecretKey, { expiresIn: '10m' });
+        const token = createJwtWebToken({ first_name, last_name, username, email, password }, jwtSecretKey, { expiresIn: '10m' });
 
         const emailBody = {
             from: "ecommerce@gmail.com",
@@ -151,7 +146,6 @@ UserController.register = async (req, res, next) => {
         next(error);
     }
 };
-
 
 UserController.verify = async (req, res, next) => {
     try {
@@ -181,6 +175,37 @@ UserController.verify = async (req, res, next) => {
             if (error.name === 'JsonWebTokenError') return createError('Invalid Token', 401);
             throw error;
         }
+
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+UserController.userUpdateData = async (req, res, next) => {
+    try {
+        const {
+            phone,
+            image,
+            address
+        } = req.body;
+
+
+        const id = req.params.id;
+        const options = { password: 0 };
+        const [user, updatedUser] = await Promise.all([
+            findItem(User, id, options),
+            User.findByIdAndUpdate(
+                id,
+                { phone, image, address },
+                { new: true, runValidators: true }
+            )]);
+
+        return successResponse(res, {
+            statusCode: 201,
+            message: "User updated successfully",
+            payload: { updatedUser }
+        })
 
     } catch (error) {
         next(error);

@@ -74,9 +74,9 @@ const userSchema = new Schema({
     },
     phone: {
         type: String,
-        required: [true, 'Phone number is required'],
         match: [/^\+?\d{10,15}$/, "Phone number must be valid"], // +8801234567890 or 0123456789
-        unique: true
+        unique: true,
+        default: null
     },
     password: {
         type: String,
