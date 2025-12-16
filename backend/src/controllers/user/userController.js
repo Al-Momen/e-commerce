@@ -1,10 +1,7 @@
 import User from "../../models/userModel.js";
 import { successResponse } from "../../helper/responseHandler.js";
 import { findItem } from "../../services/findItem.js";
-import deleteFileAsync from "../../helper/deleteImage.js";
-import { createJwtWebToken, createError, sendEmail } from "../../helper/helper.js";
-import { jwtSecretKey, smtpClientUrl } from "../../helper/secret.js";
-import jwt from 'jsonwebtoken';
+import deleteFileAsync from "../../services/deleteImage.js";
 
 const UserController = {};
 
@@ -107,6 +104,7 @@ UserController.delete = async (req, res, next) => {
     }
 };
 
+<<<<<<< HEAD
 UserController.register = async (req, res, next) => {
     try {
         const {
@@ -213,4 +211,6 @@ UserController.userUpdateData = async (req, res, next) => {
 
 }
 
+=======
+>>>>>>> cbbebd8f78ae9911ee9006763f85d5882671dd47
 export default UserController;
