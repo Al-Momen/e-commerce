@@ -104,7 +104,6 @@ UserController.delete = async (req, res, next) => {
     }
 };
 
-<<<<<<< HEAD
 UserController.register = async (req, res, next) => {
     try {
         const {
@@ -211,6 +210,4 @@ UserController.userUpdateData = async (req, res, next) => {
 
 }
 
-=======
->>>>>>> cbbebd8f78ae9911ee9006763f85d5882671dd47
 export default UserController;
