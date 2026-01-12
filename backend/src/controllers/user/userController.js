@@ -187,7 +187,6 @@ UserController.userUpdateData = async (req, res, next) => {
             address
         } = req.body;
 
-
         const id = req.params.id;
         const options = { password: 0 };
         const [user, updatedUser] = await Promise.all([

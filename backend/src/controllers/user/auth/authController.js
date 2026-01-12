@@ -1,6 +1,6 @@
 
-import { createJwtWebToken, createError, sendEmail } from "../../helper/helper.js";
-import { jwtSecretKey, smtpClientUrl } from "../../helper/secret.js";
+import { createJwtWebToken, createError, sendEmail } from "../../../helper/helper.js";
+import { jwtSecretKey, smtpClientUrl } from "../../../helper/secret.js";
 import jwt from 'jsonwebtoken';
 
 const authController = {};
