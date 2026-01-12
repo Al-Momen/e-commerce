@@ -50,8 +50,8 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: [true, 'Username is required'],
-        minLength: [5, 'Username minimum Length 3 character'],
-        maxLength: [20, 'Username maximum Length 10 character'],
+        minLength: [5, 'Username minimum Length 5 character'],
+        maxLength: [20, 'Username maximum Length 20 character'],
         match: [/^[A-Za-z0-9]+$/, "Username can only contain letters and numbers"],
         trim: true,
         lowercase: true,
@@ -85,7 +85,7 @@ const userSchema = new Schema({
     image: {
         type: String,
         default: 'default.png',
-        match: [/\.(jpg|jpeg|png|gif)$/i, 'Only image files are allowed'],
+        match: [/\.(JPEG|JPG|PNG|jpg|jpeg|png)$/i, 'Only image files are allowed'],
         trim: true
     },
     address: {

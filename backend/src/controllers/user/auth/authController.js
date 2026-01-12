@@ -2,10 +2,13 @@
 import { createJwtWebToken, createError, sendEmail } from "../../../helper/helper.js";
 import { jwtSecretKey, smtpClientUrl } from "../../../helper/secret.js";
 import jwt from 'jsonwebtoken';
+import User from "../../../models/userModel.js";
+import { successResponse } from "../../../helper/responseHandler.js";
 
 const authController = {};
 
 authController.register = async (req, res, next) => {
+
     try {
         const {
             first_name,
@@ -22,7 +25,6 @@ authController.register = async (req, res, next) => {
         if (emailExists) {
             createError('User with this email already exists. Please login', 409);
         }
-
         const token = createJwtWebToken({ first_name, last_name, username, email, phone, password, image, address }, jwtSecretKey, { expiresIn: '5m' });
 
         const emailBody = {
@@ -35,7 +37,7 @@ authController.register = async (req, res, next) => {
                     `
         }
 
-        await sendEmail(emailBody);
+        // await sendEmail(emailBody);
 
         return successResponse(res, {
             statusCode: 201,
@@ -51,21 +53,22 @@ authController.register = async (req, res, next) => {
 
 authController.verify = async (req, res, next) => {
     try {
+        
         const token = req?.body?.token;
         if (token === "undefined") createError('Token is undefined', 500);
         if (!token) createError('Token not found', 404);
 
         try {
+            
             const decode = jwt.verify(token, jwtSecretKey);
+            
             if (!decode) createError('Token not found', 401);
 
             const emailExists = await User.exists({ email: decode.email })
             if (emailExists) {
                 createError('User with this email already exists. Please login', 409);
             }
-
             const newUser = await User.create(decode);
-
             return successResponse(res, {
                 statusCode: 201,
                 message: "User registered successfully",
