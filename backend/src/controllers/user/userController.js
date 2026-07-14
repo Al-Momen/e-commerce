@@ -104,7 +104,6 @@ UserController.delete = async (req, res, next) => {
     }
 };
 
-
 UserController.userUpdateData = async (req, res, next) => {
     try {
         const {

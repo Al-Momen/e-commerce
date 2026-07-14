@@ -68,7 +68,6 @@ async function sendEmail(emailBody) {
 }
 
 
-
 // ----------------End mail setup ----------------
 
 export { createError, createJwtWebToken,sendEmail };
